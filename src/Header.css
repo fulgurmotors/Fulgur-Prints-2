@@ -1,3 +1,5 @@
+@import "Colors.css";
+
 .header{
     background-color: #fff;
     display: flex;
@@ -44,9 +46,9 @@
 .header__basketEmpty{
     vertical-align: bottom;
     padding: 3px;
-    background-color: black;
+    background-color: var(--color);
     color: aliceblue;
-    border-radius: 2.5px;
+    border-radius: 5px;
     width: 5px;
     height: 5px;
     line-height: 5px;
