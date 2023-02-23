@@ -6,4 +6,4 @@ In project folder, run `npm install --legacy-peer-deps`
 
 (If there is errors it's normal don't touch it)
 
-To start, type npm start
+To start, type `npm start`
