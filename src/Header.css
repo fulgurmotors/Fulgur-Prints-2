@@ -60,18 +60,13 @@
     top: 5px;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 550px) {
     .header__logo {
       width: 10%;
     }
 
-    .header__optionLine{
-        font-size: 120%;
-        margin: 0%;
-    }
 
     .header__optionIcon{
-        transform: scale(0.8);
         margin: 0%;
     }
 
