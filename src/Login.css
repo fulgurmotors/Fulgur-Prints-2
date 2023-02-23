@@ -35,7 +35,6 @@ input{
 }
 
 .login__signInButton{
-    
     border: 2px solid;
     margin: 15px var(--margin);
     height: 30px;
