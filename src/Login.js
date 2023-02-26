@@ -14,7 +14,7 @@ function Login(){
                 <div className='login__containerBox'>
                     <div className="login__inputBox">
                         <MailIcon className='login__optionIcon'/>
-                        <input type='email' required/>
+                        <input type='email' required placeholder=" "/>
                         <label>E-mail</label>
                     </div>
                     <div className="login__inputBox">
@@ -22,7 +22,7 @@ function Login(){
                         <input type='password' required/>
                         <label>Mot de Passe</label>
                     </div>
-                    <button type='submit' className='login__signInButton'>Se connecter</button>
+                    <button type='submit' className='login__signInButton' content="Se connecter">Se connecter</button>
                 </div>
             </div>
         </div>
