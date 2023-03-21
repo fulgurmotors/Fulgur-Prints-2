@@ -19,7 +19,7 @@ function Login(){
                     </div>
                     <div className="login__inputBox">
                         <LockIcon className='login__optionIcon'/>
-                        <input type='password' required/>
+                        <input type='password' required placeholder=" "/>
                         <label>Mot de Passe</label>
                     </div>
                     <button type='submit' className='login__signInButton' content="Se connecter">Se connecter</button>
