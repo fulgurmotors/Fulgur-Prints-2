@@ -4,12 +4,17 @@ import Product from './components/Product'
 
 function Home(){
     return(
-        <Product
-            id='1010'
-            title='Chargeur sans fil'
-            price={11.67}
-            rating={4}
-            image='test'/>
+        <div className='proto'>
+            <Product id='0G481'/>
+            <Product id='0G481'/>
+            <Product id='0G481'/>
+            <Product id='0G481'/>
+            <Product id='0G481'/>
+            <Product id='0G481'/>
+            <Product id='0G481'/>
+            <Product id='0G481'/>
+        </div>
+        
     )
 }
 
