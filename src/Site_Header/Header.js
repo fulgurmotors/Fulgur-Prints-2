@@ -1,7 +1,8 @@
 import React from 'react'
 import './Header.css'
-import logo from './Images/Fulgur_prints.png'
-import petitlogo from './Images/logoF.png'
+import LogoFulgur from '../components/Images/Logo/Fulgur Noir.png'
+import LogoPrint from '../components/Images/Logo/logoPrint.png'
+import petitlogo from '../components/Images/Logo/Fulgur Noir.png'
 import Profil from '@material-ui/icons/Person'
 import Panier from '@material-ui/icons/ShoppingBasket'
 import { Link } from 'react-router-dom'
@@ -9,7 +10,8 @@ import { Link } from 'react-router-dom'
 function Header(){
     return(
         <nav className='header'>
-            <img className='header__logo' alt='logo' src={window.innerWidth > 500 ? logo : petitlogo}/>
+            <img className='header__LogoFulgur header__logo' alt='logo' src={window.innerWidth > 500 ? LogoFulgur : petitlogo}/>
+            <img className='header__LogoPrint header__logo' alt='logo' src={window.innerWidth > 500 ? LogoPrint : petitlogo}/>
             <Link to='/' className='header__link'>
             <div className='header__option'>
                 <span className='header__optionLine'>Catalogue</span>

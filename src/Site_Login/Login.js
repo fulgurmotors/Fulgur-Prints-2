@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from './Images/Fulgur_prints.png'
+import logo from '../components/Images/Logo/logoPrint.png'
 import './Login.css'
 import LockIcon from '@material-ui/icons/LockOutlined'
 import MailIcon from '@material-ui/icons/MailOutline'

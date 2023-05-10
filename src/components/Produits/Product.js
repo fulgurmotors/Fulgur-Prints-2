@@ -1,6 +1,6 @@
 import React from "react";
 import './Product.css'
-import { produits } from "./productsList";
+import { produits } from "../productsList";
 
 function Product({id}){
     let index = -1
@@ -20,7 +20,7 @@ function Product({id}){
                 <div className="produit__titre">
                     {nom}
                 </div>
-                <img className='produit__image' alt='logo' src={require(`./images-produits/${id}-${produits[index].couleur[0]}.png`)}/>
+                <img className='produit__image' alt='logo' src={require(`./Images/${id}-${produits[index].couleur[0]}.png`)}/>
                 <div className="produit__prix">
                     <strong>{prix}</strong>
                     <small>€</small>

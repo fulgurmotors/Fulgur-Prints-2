@@ -1,4 +1,4 @@
-@import "Colors.css";
+
 
 .header{
     
@@ -13,11 +13,16 @@
     background-color: #fff;
 }
 
+
+
 .header__logo{
-    width: 150px;
-    padding: 5px;
-    margin-left: 5px;
+    height: 90%;
+    margin-left: 10px;
     background: transparent;
+}
+
+.header__LogoFulgur{
+    margin-left: 15px;
 }
 
 .header__link{
