@@ -4,7 +4,7 @@ export const produits = [
     nom: 'Pot de fleur',
     prix: 25.99,
     dimensions: '10x10x10cm',
-    couleur: ['Bleu', 'Vert', 'Rouge'],
+    couleur: ['green', 'purple', 'red', 'yellow', 'blue'],
     poids: '500g',
     description: 'Un pot de fleur élégant et moderne qui convient à tout type de plante d\'intérieur.'
   },

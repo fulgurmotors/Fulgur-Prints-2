@@ -3,6 +3,7 @@ import './Product.css'
 import { produits } from "../productsList";
 
 function Product({id}){
+    
     let index = -1
     console.log(id, produits.length)
     for (let i = 0; i < produits.length; i++) {
@@ -12,7 +13,7 @@ function Product({id}){
         }
     }
     const { nom, prix } = produits[index]
-      
+    const [couleur, setCouleur] = React.useState(produits[index].couleur[0])
     
     return (
         <div className="produit">
@@ -20,10 +21,18 @@ function Product({id}){
                 <div className="produit__titre">
                     {nom}
                 </div>
-                <img className='produit__image' alt='logo' src={require(`./Images/${id}-${produits[index].couleur[0]}.png`)}/>
+                <img className='produit__image' alt='logo' src={require(`./Images/${id}-${couleur}.png`)}/>
+                <div className="produit__couleur">
+                {produits[index].couleur.map((coul, size) => (
+                    <div className="produit__coulcontour">
+                    <div key={size} style={{ backgroundColor: coul }} className="produit__listecoul" onMouseEnter={() => setCouleur(coul)}/>
+                    </div>
+                ))}
+                </div>
                 <div className="produit__prix">
                     <strong>{prix}</strong>
                     <small>€</small>
+
                 </div>
             </div>
         </div>

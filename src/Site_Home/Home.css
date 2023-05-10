@@ -1,8 +1,16 @@
-.proto{
-    display: grid;
-    gap: 0px;
-    grid-auto-flow: column;
-    grid-auto-columns: 300px;
-    overflow-x: auto;
-    scrollbar-width: none;
+.home__titre {
+    font-size: 30px;
+    background: rgba(228, 228, 228, 0.902);
+    box-shadow: 4px 8px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    margin: 10px 20px;
+    padding: 20px;
+    position: sticky;
+    z-index: 3;
+    max-width: 100%;
+}
+
+.home {
+    display: flex;
+    flex-direction: column;
 }

@@ -1,18 +1,12 @@
 import React from 'react'
 import './Home.css'
-import Product from '../components/Produits/Product'
+import ListeProduit from '../components/ListeProduit/ListeProduit'
 
 function Home(){
     return(
-        <div className='proto'>
-            <Product id='0G481'/>
-            <Product id='0G481'/>
-            <Product id='0G481'/>
-            <Product id='0G481'/>
-            <Product id='0G481'/>
-            <Product id='0G481'/>
-            <Product id='0G481'/>
-            <Product id='0G481'/>
+        <div className='home'>
+            <div className="home__titre">Mieux notés</div>
+            <ListeProduit/>
         </div>
         
     )
