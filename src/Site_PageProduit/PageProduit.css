@@ -1,0 +1,51 @@
+.pproduit{
+    margin: 20px 20px;
+}
+
+
+
+.pproduit__infos{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.pproduit__images {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.pproduit__imageprincipale{
+    width: 80%;
+    align-items: center;
+}
+
+.pproduit__imagessecondaires{
+    display: flex;
+    justify-content: space-between;
+}
+
+.pproduit__titre{
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.pproduit__prix{
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0;
+    display: flex;
+}
+
+.pproduit__prixdecimales{
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+    margin-top: 2px;
+}

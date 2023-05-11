@@ -1,8 +1,9 @@
 .liste {
     display: grid;
-    gap: 0px;
     grid-auto-flow: column;
+    gap: 20px;
     grid-auto-columns: 300px;
     overflow-x: auto;
     scrollbar-width: none;
+    padding: 0 20px;
 }

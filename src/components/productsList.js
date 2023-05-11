@@ -17,4 +17,4 @@ export const produits = [
     poids: '200g',
     description: 'Un support de téléphone universel qui convient à tous les types de téléphones portables.'
   }
-];
+]
