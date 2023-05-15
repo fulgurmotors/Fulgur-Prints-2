@@ -1,6 +1,7 @@
 import React from "react"
 import './PageProduit.css'
 import { produits } from "../components/productsList"
+import { Slider } from "@material-ui/core"
 function PageProduit() {
 
     let index = -1
@@ -30,8 +31,11 @@ function PageProduit() {
                         <div className="pproduit__prixentier">{Math.floor(produits[index].prix)}</div>
                         <div className="pproduit__prixdecimales">.{(produits[index].prix - Math.floor(produits[index].prix)).toFixed(2).substring(2)} €</div>
                     </div>
-                    {produits[index].dimensions}
                     {produits[index].description}
+                    <hr className='login__horizontalBar'/>
+                    <Slider/>
+                    <hr className='login__horizontalBar'/>
+                    
                 </div>
             </div>
             {index}
