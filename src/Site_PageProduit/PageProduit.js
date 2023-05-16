@@ -3,7 +3,6 @@ import './PageProduit.css'
 import { produits } from "../components/productsList"
 import { Button, Slider, TextField, Tooltip } from "@material-ui/core"
 import { AddShoppingCart } from "@material-ui/icons"
-import Viewer3D from '../components/3DViewer/3DViewer.js'
 let prixaajouter = 0
 
 function PageProduit() {
@@ -44,12 +43,11 @@ function PageProduit() {
 
             <div className="pproduit__infos">
                 <div className="pproduit__images">
-                    <div className="pproduit__imageprincipale">{/*<img className='produit__image' alt='logo' src={require(`../components/Produits/Images/${id}-${couleur}.png`)} />*/}
-                        <Viewer3D />
+                    <div className="pproduit__imageprincipale">{<img className='produit__image' alt='logo' src={require(`../components/Produits/Images/${id}-${couleur}.png`)} />}
                     </div>
                     <div className="pproduit__imagessecondaires">
                         {produits[index].couleur.map((coul, size) => (
-                            <img key={size} className='produit__image' alt='logo' src={require(`../components/Produits/Images/${id}-${coul}.png`)} />
+                            <img key={size} className='produit__image' alt='logo' src={require(`../components/Produits/Images/${id}-${coul}.png`)} onMouseEnter={() => setCouleur(coul)} />
                         ))}
 
                     </div>
