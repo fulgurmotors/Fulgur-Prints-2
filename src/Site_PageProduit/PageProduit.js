@@ -24,7 +24,7 @@ function PageProduit() {
         setTailleX(newValue); // Mettre à jour la valeur lorsque le Slider est modifié
         setTailleY(newValue * produits[index].dimensions[1] / produits[index].dimensions[0])
         setTailleZ(newValue * produits[index].dimensions[2] / produits[index].dimensions[0])
-        setPrix(newValue * produits[index].prix / produits[index].dimensions[0])
+        setPrix(produits[index].prix * ((newValue / produits[index].dimensions[0])**3))
     }
 
     const handleChange = (event) => {

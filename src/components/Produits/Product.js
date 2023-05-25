@@ -13,6 +13,13 @@ function Product({ id }) {
     }
     const { nom, prix } = produits[index]
     const [couleur, setCouleur] = React.useState(produits[index].couleur[0])
+    const [picturenumber, setPictureNumber] = React.useState('0000')
+
+    const animation = () => {
+        let num = parseInt(picturenumber, 10)
+        num++
+        setPictureNumber(num.toString().padStart(4, '0'))
+    }
 
     return (
         <div className="produit">
@@ -20,7 +27,7 @@ function Product({ id }) {
                 <div className="produit__titre">
                     {nom}
                 </div>
-                <img className='produit__image' alt='logo' src={require(`./Images/${id}-${couleur}.png`)} />
+                <img className='produit__image' alt='logo' onMouseOver={animation} src={require(`./Images/${nom}/${couleur}/${picturenumber}.png`)} />
                 <div className="produit__couleur">
                     {produits[index].couleur.map((coul, size) => (
                         <div className="produit__coulcontour">
