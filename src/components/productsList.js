@@ -1,10 +1,10 @@
 export const produits = [
   {
     id: '0G481',
-    nom: 'PotdeFleur',
+    nom: 'Pot de Fleur',
     prix: 25.99,
     dimensions: [ 10, 10, 10],
-    couleur: ['red'],
+    couleur: ['red', 'blue'],
     poids: '500g',
     description: 'Un pot de fleur élégant et moderne qui convient à tout type de plante d\'intérieur.'
   },

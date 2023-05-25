@@ -4,4 +4,4 @@
 ['blue', '#1C488F'], 
 ['yellow', '#F7E317'], 
 ['white', '#E7EDED'], 
-['black', '#201D18']]
+['black', '#535353']]

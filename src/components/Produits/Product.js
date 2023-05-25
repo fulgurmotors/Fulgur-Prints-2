@@ -1,44 +1,70 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react"
 import './Product.css'
-import { produits } from "../productsList";
+import { produits } from "../productsList"
+let num = 0
 
 function Product({ id }) {
+    const index = useRef(-1)
+    const [product, setProduct] = useState(null)
+    const [couleur, setCouleur] = useState(null)
+    const [picturenumber, setPictureNumber] = useState('0000')
+    const intervalRef = useRef()
 
-    let index = -1
-    for (let i = 0; i < produits.length; i++) {
-        if (produits[i].id === id) {
-            index = i
-            console.log(index)
+    useEffect(() => {
+        for (let i = 0; i < produits.length; i++) {
+            if (produits[i].id === id) {
+                index.current = i
+            }
         }
-    }
-    const { nom, prix } = produits[index]
-    const [couleur, setCouleur] = React.useState(produits[index].couleur[0])
-    const [picturenumber, setPictureNumber] = React.useState('0000')
+        if(index.current !== -1){
+            setProduct(produits[index.current])
+            setCouleur(produits[index.current].couleur[0])
+        }
+    }, [id])
 
     const animation = () => {
-        let num = parseInt(picturenumber, 10)
+        if (num === 125) {
+            num = 0
+        }
         num++
+        console.log('num', num)
         setPictureNumber(num.toString().padStart(4, '0'))
+    }
+
+    const startAnimation = () => {
+        console.log('start')
+        intervalRef.current = setInterval(animation, 50) // Commence l'animation toutes les secondes
+    }
+
+    const stopAnimation = () => {
+        clearInterval(intervalRef.current) // Arrête l'animation
+    }
+
+    useEffect(() => {
+        return () => clearInterval(intervalRef.current) // Nettoyage en cas de démontage du composant
+    }, [])
+
+    if (!product || !couleur) {
+        return null
     }
 
     return (
         <div className="produit">
             <div className="produit__info">
                 <div className="produit__titre">
-                    {nom}
+                    {product.nom}
                 </div>
-                <img className='produit__image' alt='logo' onMouseOver={animation} src={require(`./Images/${nom}/${couleur}/${picturenumber}.png`)} />
+                <img className='produit__image' alt='logo' onMouseEnter={startAnimation} onMouseLeave={stopAnimation} src={require(`./Images/${product.nom}/${couleur}/${picturenumber}.png`)} />
                 <div className="produit__couleur">
-                    {produits[index].couleur.map((coul, size) => (
+                    {product.couleur.map((coul, key) => (
                         <div className="produit__coulcontour">
-                            <div key={size} style={{ backgroundColor: coul }} className="produit__listecoul" onMouseEnter={() => setCouleur(coul)} />
+                            <div key={key} style={{ backgroundColor: coul }} className="produit__listecoul" onMouseEnter={() => setCouleur(coul)} />
                         </div>
                     ))}
                 </div>
                 <div className="produit__prix">
-                    <strong>{prix}</strong>
+                    <strong>{product.prix}</strong>
                     <small>€</small>
-
                 </div>
             </div>
         </div>
