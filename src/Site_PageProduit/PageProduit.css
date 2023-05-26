@@ -28,6 +28,7 @@
 .pproduit__imagessecondaires{
     display: flex;
     justify-content: space-between;
+    width: 10%;
 }
 
 .pproduit__titre{

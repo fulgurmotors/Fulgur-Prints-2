@@ -10,7 +10,7 @@ function ListeProduit() {
                 <Produit id='0G481' />
             </Link>
             <Link to='/produit/0G481' style={{ textDecoration: 'none', color: 'black' }} >
-                <Produit id='0G481' />
+                <Produit id='YF3CZ' />
             </Link>
             <Link to='/produit/0G481' style={{ textDecoration: 'none', color: 'black' }} >
                 <Produit id='0G481' />

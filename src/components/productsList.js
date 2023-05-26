@@ -4,7 +4,7 @@ export const produits = [
     nom: 'Pot de Fleur',
     prix: 25.99,
     dimensions: [ 10, 10, 10],
-    couleur: ['red', 'blue'],
+    couleur: ['red', 'blue', 'black', 'white', 'yellow', 'green'],
     poids: '500g',
     description: 'Un pot de fleur élégant et moderne qui convient à tout type de plante d\'intérieur.'
   },
@@ -22,7 +22,7 @@ export const produits = [
     nom: 'Dé',
     prix: 5,
     dimensions: [3, 3, 3],
-    couleur: ['blue'],
+    couleur: ['white'],
     poids: '200g',
     description: 'Un support de téléphone universel qui convient à tous les types de téléphones portables.'
   }

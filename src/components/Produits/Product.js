@@ -11,6 +11,7 @@ function Product({ id }) {
     const intervalRef = useRef()
 
     useEffect(() => {
+        console.log('id', id)
         for (let i = 0; i < produits.length; i++) {
             if (produits[i].id === id) {
                 index.current = i
