@@ -33,9 +33,9 @@ function PageProduit() {
             setProduct(produits[index.current])
             setCouleur(produits[index.current].couleur[0])
             // Initialisation des states ici après avoir défini product
-            setTailleX(Number(produits[index.current].dimensions[0]))
-            setTailleY(Number(produits[index.current].dimensions[1]))
-            setTailleZ(Number(produits[index.current].dimensions[2]))
+            setTailleX(Number(produits[index.current].dimensions.longueur))
+            setTailleY(Number(produits[index.current].dimensions.largeur))
+            setTailleZ(Number(produits[index.current].dimensions.hauteur))
             setPrix(Number(produits[index.current].prix))
         }
     }, [id])
@@ -64,9 +64,9 @@ function PageProduit() {
 
     const handleSliderChange = (event, newValue) => {
         setTailleX(newValue); // Mettre à jour la valeur lorsque le Slider est modifié
-        setTailleY(newValue * product.dimensions[1] / product.dimensions[0])
-        setTailleZ(newValue * product.dimensions[2] / product.dimensions[0])
-        setPrix(product.prix * ((newValue / product.dimensions[0])**3))
+        setTailleY(newValue * product.dimensions.largeur / product.dimensions.longueur)
+        setTailleZ(newValue * product.dimensions.hauteur / product.dimensions.longueur)
+        setPrix(product.prix * ((newValue / product.dimensions.longueur)**3))
     }
 
     const handleChange = (event) => {
