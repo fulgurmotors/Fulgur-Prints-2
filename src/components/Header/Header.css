@@ -14,24 +14,33 @@
     z-index: 4;
 }
 
+.header__option{
+    display: flex;
+    
+}
 
-
-.header__logo{
+.header__option .header__optionLine{
     height: 90%;
     margin-left: 10px;
     background: transparent;
+    margin-right: 20px;
+    text-decoration: none;
+    color: black;
+}
+
+.header__logo{
+    height: 95%;
+    margin-left: 10px;
+}
+
+.header__LogoPrint{
+    margin-right: auto;
 }
 
 .header__LogoFulgur{
     margin-left: 15px;
 }
 
-.header__link{
-    margin-left: auto;
-    margin-right: 20px;
-    text-decoration: none;
-    color: black;
-}
 
 .header__optionLine{
     margin: 0 5px ;
