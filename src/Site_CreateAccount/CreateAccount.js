@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom"
 import logo from '../components/Images/Logo/logoPrint.png'
 import './CreateAccount.css'
 import LockIcon from '@material-ui/icons/LockOutlined'
@@ -9,6 +10,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth'
 import AuthContext from '../Site/Auth'
 import { auth, db } from '../Site/Firebase'
 import { addDoc, collection } from 'firebase/firestore'
+import { Link } from 'react-router-dom'
 
 function Login() {
     const [email, setEmail] = React.useState('')
@@ -16,6 +18,7 @@ function Login() {
     const [name, setName] = React.useState('')
     const [adress, setAdress] = React.useState('')
     const [user, setUser] = React.useState('')
+    let history = useNavigate();
 
 
     const onSubmit = async (e) => {
@@ -35,9 +38,13 @@ function Login() {
                 setUser(currentuser)
             })
             .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
+                const errorCode = error.code
+                const errorMessage = error.message
+                console.log(errorCode, errorMessage)
+                if (errorCode === 'auth/email-already-in-use'){
+                    alert('Email déjà utilisé')
+                    history("/login")
+                }
                 // ..
             })
 

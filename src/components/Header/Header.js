@@ -47,7 +47,7 @@ function Header() {
                     <Badge badgeContent={badgeContent} color="primary" anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
                         <Panier className='header__optionIcon' />
                     </Badge>
-                    <Link to='/createaccount'>
+                    <Link to={user ? '/login' : '/createaccount'}>
                         <Profil className='header__optionIcon' />
                     </Link>
                 </div>
