@@ -13,22 +13,26 @@
 }
 
 .pproduit__images {
-    display: flex;
+    display: inline-grid;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     margin: 10px 0;
 }
 
+
+.pproduit__image2{
+    width: 100%;
+    max-width: 15em;
+}
+
 .pproduit__imageprincipale{
-    width: 80%;
-    align-items: center;
+    width: 100%;
 }
 
 .pproduit__imagessecondaires{
-    display: flex;
+    display: inline-grid;
     justify-content: space-between;
-    width: 100%;
 }
 
 .pproduit__titre{

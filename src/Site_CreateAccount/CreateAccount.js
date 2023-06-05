@@ -1,90 +1,82 @@
-import React from 'react';
-import {
-  Container,
-  Typography,
-  TextField,
-  Button,
-  makeStyles,
-} from '@material-ui/core';
+import React from 'react'
+import logo from '../components/Images/Logo/logoPrint.png'
+import './CreateAccount.css'
+import LockIcon from '@material-ui/icons/LockOutlined'
+import MailIcon from '@material-ui/icons/MailOutline'
+import BadgeIcon from '@mui/icons-material/BadgeOutlined'
+import HomeIcon from '@mui/icons-material/HomeOutlined'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import AuthContext from '../Site/Auth'
+import { auth, db } from '../Site/Firebase'
+import { addDoc, collection } from 'firebase/firestore'
 
-const useStyles = makeStyles((theme) => ({
-  container: {
-    marginTop: theme.spacing(4),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  title: {
-    marginBottom: theme.spacing(2),
-  },
-  form: {
-    width: '100%',
-    marginTop: theme.spacing(2),
-  },
-  submitButton: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+function Login() {
+    const [email, setEmail] = React.useState('')
+    const [password, setPassword] = React.useState('')
+    const [name, setName] = React.useState('')
+    const [adress, setAdress] = React.useState('')
+    const [user, setUser] = React.useState('')
 
-const SignupPage = () => {
-  const classes = useStyles();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Add your signup logic here
-  };
+    const onSubmit = async (e) => {
+        e.preventDefault()
+        console.log(auth)
+        await createUserWithEmailAndPassword(auth, email, password)
+            .then(async (userCredential) => {
 
-  return (
-    <Container component="main" maxWidth="xs">
-      <div className={classes.container}>
-        <Typography variant="h4" className={classes.title}>
-          Sign Up
-        </Typography>
-        <form className={classes.form} onSubmit={handleSubmit}>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="name"
-            label="Name"
-            name="name"
-            autoComplete="name"
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submitButton}
-          >
-            Sign Up
-          </Button>
-        </form>
-      </div>
-    </Container>
-  );
-};
+                // Signed in
+                const currentuser = userCredential.user;
+                await addDoc(collection(db, "users"), {
+                    uid: currentuser.uid,
+                    name: name,
+                    adress: adress,
+                    email: email,
+                })
+                setUser(currentuser)
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode, errorMessage);
+                // ..
+            })
 
-export default SignupPage;
+
+    }
+
+    return (
+        <div className='login'>
+            <img className='login__logo' alt='logo' src={logo} />
+            <div className='login__container'>
+                <h1>Inscription</h1>
+                <hr className='login__horizontalBar' />
+                <div className='login__containerBox'>
+                    <div className="login__inputBox">
+                        <BadgeIcon className='login__optionIcon' />
+                        <input type='name' required placeholder=" " onChange={(e) => setName(e.target.value)} />
+                        <label>Nom Prénom</label>
+                    </div>
+                    <div className="login__inputBox">
+                        <HomeIcon className='login__optionIcon' />
+                        <input type='adress' required placeholder=" " onChange={(e) => setAdress(e.target.value)} />
+                        <label>Adresse</label>
+                    </div>
+                    <div className="login__inputBox">
+                        <MailIcon className='login__optionIcon' />
+                        <input type='email' required placeholder=" " onChange={(e) => setEmail(e.target.value)} />
+                        <label>E-mail</label>
+                    </div>
+                    <div className="login__inputBox">
+                        <LockIcon className='login__optionIcon' />
+                        <input type='password' required placeholder=" " onChange={(e) => setPassword(e.target.value)} />
+                        <label>Mot de Passe</label>
+                    </div>
+                    <button type='submit' className='login__signInButton' content="Se connecter" onClick={onSubmit}>Se connecter</button>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+
+export default Login

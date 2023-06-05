@@ -1,8 +1,11 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState, useEffect, useRef, useContext } from "react"
 import './PageProduit.css'
 import { produits } from "../components/productsList"
 import { Button, Slider, TextField, Tooltip } from "@material-ui/core"
 import { AddShoppingCart } from "@material-ui/icons"
+import AuthContext from "../Site/Auth"
+import { CartContext } from "../components/Header/Header"
+
 let prixaajouter = 0
 let num = 0
 
@@ -13,6 +16,8 @@ function PageProduit() {
     const [couleur, setCouleur] = useState(null)
     const [picturenumber, setPictureNumber] = useState('0000')
     const intervalRef = useRef()
+    const user = useContext(AuthContext)
+    const {updateCart} = useContext(CartContext)
 
     // Déclaration des states ici sans initialisation
     const [tailleX, setTailleX] = React.useState(null)
@@ -80,16 +85,33 @@ function PageProduit() {
             prixaajouter = 0
         }
     }
+
+    const ajouterauPanier = () => {
+        console.log('ajouter au panier')
+        const produitaajouter = {
+            id: product.id,
+            taille: tailleX,
+            couleur: couleur,
+            prix: prix
+        }
+            console.log('produitaajouter', produitaajouter)
+            let panier = JSON.parse(localStorage.getItem('panier')) || []
+            panier.push(produitaajouter)
+            localStorage.setItem('panier', JSON.stringify(panier))
+            console.log('panier', panier)
+            updateCart()
+    }
+
     return (
         <div className="pproduit">
 
             <div className="pproduit__infos">
                 <div className="pproduit__images">
-                    <div className="pproduit__imageprincipale">{<img className='produit__image' alt='logo' src={require(`../components/Produits/Images/${product.nom}/${couleur}/${picturenumber}.png`)} onMouseEnter={startAnimation} onMouseLeave={stopAnimation} />}
-                    </div>
-                    <div className="pproduit__imagessecondaires">
+                    {<img className='pproduit__imageprincipale' alt='logo' src={require(`../components/Produits/Images/${product.nom}/${couleur}/${picturenumber}.png`)} onMouseEnter={startAnimation} onMouseLeave={stopAnimation} />}
+                    
+                    <div className="pproduit__imagessecondaires" style={{gridTemplateColumns: `repeat(${product.couleur.length}, 1fr`}}>
                         {product.couleur.map((coul, size) => (
-                            <img key={size} className='produit__image' alt='logo' src={require(`../components/Produits/Images/${product.nom}/${coul}/0000.png`)} onMouseEnter={() => setCouleur(coul)} />
+                            <img key={size} className='pproduit__image2' alt='logo' src={require(`../components/Produits/Images/${product.nom}/${coul}/0000.png`)} onMouseEnter={() => setCouleur(coul)} />
                         ))}
 
                     </div>
@@ -109,7 +131,7 @@ function PageProduit() {
                         <div className="pproduit__ajoutmessage">Ajouter un message ? (2€) {textValue}</div>
                     </Tooltip>
                     <TextField variant="outlined" size="small" style={{ width: '99%', marginTop: '10px' }} value={textValue} onChange={handleChange} />
-                    <Button variant="contained" size="large" style={{ backgroundColor: "#FFD814", marginTop: '30px' }} startIcon={<AddShoppingCart />}>Ajouter au panier</Button>
+                    <Button variant="contained" size="large" style={{ backgroundColor: "#FFD814", marginTop: '30px' }} startIcon={<AddShoppingCart />} onClick={ajouterauPanier}>Ajouter au panier</Button>
                 </div>
             </div>
         </div>
