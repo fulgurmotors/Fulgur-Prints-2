@@ -6,33 +6,33 @@ import petitlogo from '../Images/Logo/Fulgur Noir.png'
 import Profil from '@material-ui/icons/Person'
 import Panier from '@material-ui/icons/ShoppingCart'
 import Badge from '@mui/material/Badge'
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import AuthContext from '../../Site/Auth'
-
-export const CartContext = React.createContext()
+import PanierContext from '../Panier'
 
 function Header() {
     const user = useContext(AuthContext)
-    const [cart, setCart] = React.useState([])
+    const { cart, updateCart } = useContext(PanierContext)
     const [badgeContent, setBadgeContent] = React.useState(0)
+    const navigate = useNavigate()
 
     React.useEffect(() => {
         const cartFromLocalStorage = JSON.parse(localStorage.getItem('panier')) || []
-        setCart(cartFromLocalStorage)
+        setBadgeContent(cartFromLocalStorage)
         setBadgeContent(cartFromLocalStorage.length)
     }, [])
 
     // À chaque fois que vous modifiez le panier, appelez cette fonction
-    const updateCart = (newCart) => {
-        localStorage.setItem('panier', JSON.stringify(newCart))
-        setCart(newCart)
-        setBadgeContent(newCart.length)
+    React.useEffect(() => {
+        setBadgeContent(cart.length)
+    }, [cart])
+
+    const GotoPanier = () => {
+        navigate('/panier')
     }
 
-
-
     return (
-        <CartContext.Provider value={{ cart, badgeContent, updateCart }}>
+        <PanierContext.Provider value={{ cart, badgeContent, updateCart }}>
             <nav className='header'>
 
                 <img className='header__LogoFulgur header__logo' alt='logo' src={window.innerWidth > 500 ? LogoFulgur : petitlogo} />
@@ -45,7 +45,7 @@ function Header() {
                     </Link>
 
                     <Badge badgeContent={badgeContent} color="primary" anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
-                        <Panier className='header__optionIcon' />
+                        <Panier className='header__optionIcon' onClick={GotoPanier} />
                     </Badge>
                     <Link to={user ? '/login' : '/createaccount'}>
                         <Profil className='header__optionIcon' />
@@ -53,7 +53,7 @@ function Header() {
                 </div>
 
             </nav>
-        </CartContext.Provider>
+        </PanierContext.Provider>
     )
 }
 

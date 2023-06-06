@@ -4,7 +4,7 @@ import { produits } from "../components/productsList"
 import { Button, Slider, TextField, Tooltip } from "@material-ui/core"
 import { AddShoppingCart } from "@material-ui/icons"
 import AuthContext from "../Site/Auth"
-import { CartContext } from "../components/Header/Header"
+import PanierContext from "../components/Panier"
 
 
 function PageProduit() {
@@ -15,7 +15,7 @@ function PageProduit() {
     const [picturenumber, setPictureNumber] = useState('0000')
     const intervalRef = useRef()
     const user = useContext(AuthContext)
-    const { updateCart } = useContext(CartContext)
+    const { updateCart } = useContext(PanierContext)
 
     // Déclaration des states ici sans initialisation
     const [tailleX, setTailleX] = React.useState(null)
@@ -90,7 +90,7 @@ function PageProduit() {
         console.log('ajouter au panier')
         const produitaajouter = {
             id: product.id,
-            taille: tailleX,
+            taille: [tailleX, tailleY, tailleZ],
             couleur: couleur,
             prix: prix
         }
@@ -99,12 +99,10 @@ function PageProduit() {
         panier.push(produitaajouter)
         localStorage.setItem('panier', JSON.stringify(panier))
         console.log('panier', panier)
-        updateCart()
+        updateCart(panier)
     }
 
     return (
-        <AuthContext.Provider value={{ updateCart }}>
-            <CartContext.Provider value={user}>
                 <div className="pproduit">
 
                     <div className="pproduit__infos">
@@ -137,8 +135,6 @@ function PageProduit() {
                         </div>
                     </div>
                 </div>
-            </CartContext.Provider>
-        </AuthContext.Provider>
     )
 
 
