@@ -1,0 +1,52 @@
+.panier__titre {
+  font-size: 2rem;
+  margin: 20px;
+}
+
+.panier__groupe{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #e0e0e0;
+    border-radius: 15px;
+    box-shadow: inset -20px -20px 60px #bebebe,
+            inset 20px 20px 60px #ffffff;
+    margin: 15px 20px;
+    transition: all 0.15s ease-in-out;
+}
+
+.panier__description{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 20px;
+}
+
+.panier__groupetitre {
+    font-size: 20px;
+    vertical-align: middle;
+    margin-bottom: 80px;
+}
+
+.panier__groupetaille {
+    font-size: 18px;
+}
+
+.panier__groupeprix {
+    font-size: 18px;
+}
+
+.panier__groupeimage{
+    height: 150px;
+    margin-left: 20px;
+}
+
+.panier__deleteicon{
+    margin-right: 20px;
+    margin-left: auto;
+}
+
+.panier__total{
+    font-size: 20px;
+    margin: 20px;
+}
