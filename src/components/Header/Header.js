@@ -41,7 +41,7 @@ function Header() {
                 <div className='header__option'>
                     <Link to='/'>
                         <span className='header__optionLine'>Catalogue</span>
-                        <span className='header__optionLine'>{user ? user.email : "Déposer"}</span>
+                        <span className='header__optionLine'>{user ? user.email : "Non connecté"}</span>
                     </Link>
 
                     <Badge badgeContent={badgeContent} color="primary" anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>

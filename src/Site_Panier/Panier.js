@@ -3,17 +3,22 @@ import PanierContext from '../components/Panier'
 import { produits } from '../components/productsList'
 import './Panier.css'
 import DeleteIcon from '@mui/icons-material/Delete'
+import { Button } from '@mui/material'
+import emailjs from '@emailjs/browser'
+import AuthContext from '../Site/Auth'
 
 const Panier = () => {
     const { cart } = useContext(PanierContext) // utiliser le contexte pour accéder aux éléments du panier
     console.log(cart)
     const { updateCart } = useContext(PanierContext)
+    const user = useContext(AuthContext)
 
 
     const supprimerDuPanier = (idProduit) => {
-        console.log('supprimer du panier');
-        let panier = JSON.parse(localStorage.getItem('panier')) || [];
-        const index = panier.findIndex(produit => produit.id === idProduit);
+        console.log('supprimer du panier')
+        let panier = JSON.parse(localStorage.getItem('panier')) || []
+        const index = panier.findIndex(produit => produit.id === idProduit)
+        console.log('user', user)
         if (index !== -1) {
             panier.splice(index, 1);
             localStorage.setItem('panier', JSON.stringify(panier));
@@ -22,6 +27,24 @@ const Panier = () => {
         } else {
             console.log('Produit non trouvé dans le panier');
         }
+    }
+
+    const validerPanier = () => {
+        const cartContent = cart.map(item => {
+            const produit = produits.find(prod => prod.id === item.id)
+            return `${produit.nom}, ${item.couleur}, ${item.taille[0]}x${item.taille[1]}x${item.taille[2]}, ${item.prix.toFixed(2)} €`
+        }).join('\n')
+
+        emailjs.send('service_70qa7oi', 'template_epu5rlb', {
+            username: user.email,
+            cart_content: cartContent,
+            to_email: 'adrien.laduca@free.fr', // Changer à l'e-mail du destinataire
+        }, '6NQ2Eyljh-ZkFxGnn')
+            .then((response) => {
+                console.log('SUCCESS!', response.status, response.text)
+            }, (err) => {
+                console.log('FAILED...', err)
+            })
     }
 
     return (
@@ -37,7 +60,7 @@ const Panier = () => {
                             <p className='panier__groupeprix'>Prix: {item.prix.toFixed(2)} €</p>
                             <p className='panier__groupetaille'>Taille: {item.taille[0]}x{item.taille[1]}x{item.taille[2]} cm</p>
                         </div>
-                        <DeleteIcon className='panier__deleteicon' fontSize='large' onClick={() => supprimerDuPanier(item.id)}/>
+                        <DeleteIcon className='panier__deleteicon' fontSize='large' onClick={() => supprimerDuPanier(item.id)} />
 
 
                     </div>
@@ -45,6 +68,7 @@ const Panier = () => {
             })}
             <div>
                 <h3 className='panier__total'>Total: {cart.reduce((total, item) => total + item.prix, 0).toFixed(2)} €</h3>
+                <Button variant="contained" size="large" style={{ backgroundColor: "#FFD814", marginTop: '30px' }} onClick={validerPanier}>Ajouter au panier</Button>
             </div>
         </div>
     )
