@@ -6,9 +6,10 @@ import petitlogo from '../Images/Logo/Fulgur Noir.png'
 import Profil from '@material-ui/icons/Person'
 import Panier from '@material-ui/icons/ShoppingCart'
 import Badge from '@mui/material/Badge'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import AuthContext from '../../Site/Auth'
 import PanierContext from '../Panier'
+import { auth } from '../../Site/Firebase'
 
 function Header() {
     const user = useContext(AuthContext)
@@ -31,6 +32,20 @@ function Header() {
         navigate('/panier')
     }
 
+    const deconnection = () => {
+        localStorage.removeItem('user')
+        localStorage.removeItem('panier')
+        auth.signOut().then(() => {
+            console.log('Utilisateur déconnecté')
+        })
+        .catch((error) => {
+            console.error('Erreur lors de la déconnexion : ', error)
+        })
+        updateCart([])
+        navigate('/')
+        
+    }
+
     return (
         <PanierContext.Provider value={{ cart, badgeContent, updateCart }}>
             <nav className='header'>
@@ -41,7 +56,7 @@ function Header() {
                 <div className='header__option'>
                     <Link to='/'>
                         <span className='header__optionLine'>Catalogue</span>
-                        <span className='header__optionLine'>{user ? user.email : "Non connecté"}</span>
+                        <span className='header__optionLine' onClick={deconnection}>{user ? user.email : "Non connecté"}</span>
                     </Link>
 
                     <Badge badgeContent={badgeContent} color="primary" anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
